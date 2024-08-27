@@ -1,81 +1,94 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/core/utils/colors_provider.dart';
 import 'package:todo_app/modules/layout/mangers/layout_provider.dart';
 
 class AddNewTaskBottomSheet extends StatelessWidget {
+  AddNewTaskBottomSheet({super.key});
 
-  const AddNewTaskBottomSheet({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => LayoutProvider(),
-      child: Consumer<LayoutProvider>(
-          builder: (context, provider, child) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
+      child: Consumer<LayoutProvider>(builder: (context, provider, child) {
+        var mediaQuery = MediaQuery.of(context);
+        var textScaleFactor = mediaQuery.textScaleFactor;
+
+        return SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Form(
+            key: formKey,
+            child: Padding(
+              padding: EdgeInsets.all(mediaQuery.size.width * 0.05),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Center(
+                  Center(
                     child: Text(
-                      'Add New Task',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold
-                      ),
+                      'addNewTask'.tr(),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'invaildTitle'.tr();
+                      } else {
+                        return null;
+                      }
+                    },
                     controller: provider.titleController,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary
-                    ),
-                    decoration: const InputDecoration(
-                        label: Text('title'),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25))
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 16 * textScaleFactor,
+                          fontWeight: FontWeight.w400,
                         ),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25))
-                        )
-
-                    ),
+                    decoration: InputDecoration(hintText: 'title'.tr()),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'invaildDescription'.tr();
+                      } else {
+                        return null;
+                      }
+                    },
                     controller: provider.descController,
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary
-                    ),
-                    decoration: const InputDecoration(
-                        label: Text('descripton'),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25))
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 16 * textScaleFactor,
+                          fontWeight: FontWeight.w400,
                         ),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25))
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(25))
-                        ),
-                    ),
+                    decoration: InputDecoration(hintText: 'description'.tr()),
                   ),
-                  const SizedBox(height: 10,),
-                  const Text(
-                    'Selected Time',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
-                        color: Colors.black
-                    ),
-                  ),
+                  const SizedBox(height: 30),
+                  Text('selectedDate'.tr()),
                   TextButton(
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.transparent)),
                     onPressed: () {
                       showDatePicker(
+                        builder: (context, child) {
+                          return Theme(
+                            data: ThemeData(
+                              colorScheme: ColorScheme.dark(
+                                primary: ColorsProvider.primaly,
+                                onPrimary:
+                                    Theme.of(context).colorScheme.tertiary,
+                                onSurface:
+                                    Theme.of(context).colorScheme.onTertiary,
+                              ),
+                              datePickerTheme:
+                                  Theme.of(context).datePickerTheme,
+                            ),
+                            child: child!,
+                          );
+                        },
                         context: context,
                         initialDate: provider.selectedDatePicker,
                         firstDate: DateTime.now(),
@@ -88,36 +101,88 @@ class AddNewTaskBottomSheet extends StatelessWidget {
                     },
                     child: Center(
                       child: Text(
-                        provider.selectedDatePicker.toString().substring(0, 10),
-                        style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black
+                        DateFormat.yMd(context.locale.toString())
+                            .format(provider.selectedDatePicker),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16 * textScaleFactor,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10,),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
-                          fixedSize: const Size(400, 50)
-                      ),
-                      onPressed: () {
-                        provider.addNewTask(context);
-                      },
-                      child: const Text(
-                        'Add',
+                  const SizedBox(height: 10),
+                  Text('selectedTime'.tr()),
+                  TextButton(
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.transparent)),
+                    onPressed: () {
+                      showTimePicker(
+                        builder: (context, child) {
+                          return Theme(
+                            data: ThemeData(
+                              colorScheme: ColorScheme.dark(
+                                primary: ColorsProvider.primaly,
+                                onPrimary:
+                                    Theme.of(context).colorScheme.tertiary,
+                                onSurface:
+                                    Theme.of(context).colorScheme.onTertiary,
+                              ),
+                              datePickerTheme:
+                                  Theme.of(context).datePickerTheme,
+                            ),
+                            child: child!,
+                          );
+                        },
+                        context: context,
+                        initialTime: provider.selectedTime,
+                      ).then((value) {
+                        if (value != null) {
+                          provider.setTime(value);
+                        }
+                      });
+                    },
+                    child: Center(
+                      child: Text(
+                        DateFormat('hh:mm a', context.locale.toString())
+                            .format(provider.convertTimeOfDayToDateTime(
+                          provider.selectedTime,
+                          provider.selectedDatePicker,
+                        )),
                         style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16 * textScaleFactor,
                         ),
-                      )
-                  )
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      fixedSize: Size(mediaQuery.size.width, 55),
+                    ),
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        provider.addNewTask(context);
+                      }
+                    },
+                    child: Text(
+                      'add'.tr(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16 * textScaleFactor,
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            );
-          }
-      ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }
