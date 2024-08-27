@@ -17,7 +17,7 @@ class LayoutScreen extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => LayoutProvider()..getUser()),
+        ChangeNotifierProvider(create: (_) => LayoutProvider()),
       ],
       child: Selector<LayoutProvider, int>(
         selector: (_, layoutProvider) => layoutProvider.selectedIndex,

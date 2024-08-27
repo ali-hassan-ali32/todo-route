@@ -89,11 +89,6 @@ class LayoutProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getUser() async {
-    // user = await FirebaseFunctions.getUser();
-    notifyListeners();
-  }
-
   void updateUser() {
     FirebaseFunctions.updateUser(user);
     notifyListeners();
@@ -115,7 +110,6 @@ class LayoutProvider extends ChangeNotifier {
   }
 
   DateTime convertTimeOfDayToDateTime(TimeOfDay time, DateTime date) {
-    // Create a DateTime object for the specified date with timeOfDay
     return DateTime(
       date.year,
       date.month,

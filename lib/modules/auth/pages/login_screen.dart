@@ -119,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                       'dontHaveAccount'.tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: size.width * 0.04, // Responsive font size
+                        fontSize: size.width * 0.04,
                       ),
                     ),
                   ),

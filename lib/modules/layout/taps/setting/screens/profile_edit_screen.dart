@@ -15,7 +15,7 @@ class ProfileEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => LayoutProvider()..getUser(),
+      create: (context) => LayoutProvider(),
       child: Consumer<LayoutProvider>(
         builder: (context, provider, child) {
           return Scaffold(
@@ -114,6 +114,7 @@ class ProfileEditScreen extends StatelessWidget {
                                   ),
                                   onPressed: () {
                                     provider.updateUser();
+                                    Navigator.pop(context);
                                   },
                                   child: Text(
                                     'saveChanges'.tr(),

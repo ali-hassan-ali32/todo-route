@@ -10,7 +10,7 @@ import 'package:todo_app/modules/layout/mangers/layout_provider.dart';
 import 'package:todo_app/modules/layout/taps/setting/screens/profile_edit_screen.dart';
 import 'package:todo_app/modules/layout/taps/setting/screens/widgets/custom_drop_down_widget.dart';
 
-import '../../../../auth/manger/auth_provider.dart'; // Assuming this exists
+import '../../../../auth/manger/auth_provider.dart';
 
 class SettingTab extends StatelessWidget {
   const SettingTab({super.key});
