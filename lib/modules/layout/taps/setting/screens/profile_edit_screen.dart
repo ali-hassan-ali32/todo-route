@@ -89,8 +89,7 @@ class ProfileEditScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(25),
                                     ),
                                     fixedSize: Size(
-                                        MediaQuery.of(context).size.width,
-                                        50), // Responsive button size
+                                        MediaQuery.of(context).size.width, 50),
                                   ),
                                   onPressed: () {
                                     Navigator.pushNamed(
@@ -111,12 +110,10 @@ class ProfileEditScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(25),
                                     ),
                                     fixedSize: Size(
-                                        MediaQuery.of(context).size.width,
-                                        50), // Responsive button size
+                                        MediaQuery.of(context).size.width, 50),
                                   ),
                                   onPressed: () {
-                                    provider
-                                        .updateUser(); // Update the user profile
+                                    provider.updateUser();
                                   },
                                   child: Text(
                                     'saveChanges'.tr(),
