@@ -15,8 +15,6 @@ class TaskListTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var width = size.width;
-    var height = size.height;
 
     return Consumer<LayoutProvider>(
       builder: (context, provider, child) {
@@ -24,12 +22,12 @@ class TaskListTab extends StatelessWidget {
           children: [
             Stack(
               children: [
-                AppBarCustomWidget(
-                  title: provider.user?.name.toUpperCase() ?? '',
-                  isUserName: true,
+                AppBarWidget(
+                  title: 'toDoApp'.tr(),
+                  isUser: true,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: height * 0.2),
+                  padding: const EdgeInsets.only(top: 155),
                   child: EasyInfiniteDateTimeLine(
                     locale: context.locale.toString(),
                     firstDate: FirebaseAuth
@@ -41,33 +39,33 @@ class TaskListTab extends StatelessWidget {
                     dayProps: EasyDayProps(
                       todayHighlightColor:
                           Theme.of(context).colorScheme.primary,
-                      height: height * 0.12,
+                      height: size.height * 0.12,
                       activeDayStyle: DayStyle(
                         dayNumStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                         dayStrStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                         monthStrStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                       ),
                       todayStyle: DayStyle(
                         dayNumStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                         dayStrStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                         monthStrStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                       ),
                       todayHighlightStyle: TodayHighlightStyle.withBackground,
@@ -79,7 +77,7 @@ class TaskListTab extends StatelessWidget {
                                       .bodyMedium!
                                       .color!
                                       .withOpacity(0.8),
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                         dayStrStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -88,7 +86,7 @@ class TaskListTab extends StatelessWidget {
                                       .bodyMedium!
                                       .color!
                                       .withOpacity(0.8),
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                         monthStrStyle:
                             Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -97,10 +95,11 @@ class TaskListTab extends StatelessWidget {
                                       .bodyMedium!
                                       .color!
                                       .withOpacity(0.8),
-                                  fontSize: width * 0.04,
+                                  fontSize: size.width * 0.04,
                                 ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(width * 0.03),
+                          borderRadius:
+                              BorderRadius.circular(size.width * 0.03),
                           color: Theme.of(context).colorScheme.primaryContainer,
                         ),
                       ),
@@ -110,7 +109,7 @@ class TaskListTab extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: height * 0.001),
+            SizedBox(height: size.height * 0.011),
             Expanded(
               child: StreamBuilder(
                 stream: provider.getTasksList(provider.selectedDate),
@@ -138,7 +137,7 @@ class TaskListTab extends StatelessWidget {
                         itemBuilder: (context, index) =>
                             TaskCard(task: tasks[index]),
                         separatorBuilder: (context, index) =>
-                            SizedBox(height: height * 0.02),
+                            SizedBox(height: size.height * 0.02),
                         itemCount: tasks.length,
                       );
                     }

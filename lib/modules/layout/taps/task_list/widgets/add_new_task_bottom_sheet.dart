@@ -15,7 +15,6 @@ class AddNewTaskBottomSheet extends StatelessWidget {
       create: (context) => LayoutProvider(),
       child: Consumer<LayoutProvider>(builder: (context, provider, child) {
         var mediaQuery = MediaQuery.of(context);
-        var textScaleFactor = mediaQuery.textScaleFactor;
 
         return SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -44,7 +43,7 @@ class AddNewTaskBottomSheet extends StatelessWidget {
                     },
                     controller: provider.titleController,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontSize: 16 * textScaleFactor,
+                          fontSize: 16,
                           fontWeight: FontWeight.w400,
                         ),
                     decoration: InputDecoration(hintText: 'title'.tr()),
@@ -60,7 +59,7 @@ class AddNewTaskBottomSheet extends StatelessWidget {
                     },
                     controller: provider.descController,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontSize: 16 * textScaleFactor,
+                          fontSize: 16,
                           fontWeight: FontWeight.w400,
                         ),
                     decoration: InputDecoration(hintText: 'description'.tr()),
@@ -73,22 +72,6 @@ class AddNewTaskBottomSheet extends StatelessWidget {
                             MaterialStatePropertyAll(Colors.transparent)),
                     onPressed: () {
                       showDatePicker(
-                        builder: (context, child) {
-                          return Theme(
-                            data: ThemeData(
-                              colorScheme: ColorScheme.dark(
-                                primary: ColorsProvider.primaly,
-                                onPrimary:
-                                    Theme.of(context).colorScheme.tertiary,
-                                onSurface:
-                                    Theme.of(context).colorScheme.onTertiary,
-                              ),
-                              datePickerTheme:
-                                  Theme.of(context).datePickerTheme,
-                            ),
-                            child: child!,
-                          );
-                        },
                         context: context,
                         initialDate: provider.selectedDatePicker,
                         firstDate: DateTime.now(),
@@ -103,9 +86,9 @@ class AddNewTaskBottomSheet extends StatelessWidget {
                       child: Text(
                         DateFormat.yMd(context.locale.toString())
                             .format(provider.selectedDatePicker),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 16 * textScaleFactor,
+                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -145,13 +128,13 @@ class AddNewTaskBottomSheet extends StatelessWidget {
                     child: Center(
                       child: Text(
                         DateFormat('hh:mm a', context.locale.toString())
-                            .format(provider.convertTimeOfDayToDateTime(
+                            .format(provider.changeTimeOfDayToDate(
                           provider.selectedTime,
                           provider.selectedDatePicker,
                         )),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 16 * textScaleFactor,
+                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -171,9 +154,9 @@ class AddNewTaskBottomSheet extends StatelessWidget {
                     },
                     child: Text(
                       'add'.tr(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 16 * textScaleFactor,
+                        fontSize: 16,
                       ),
                     ),
                   ),

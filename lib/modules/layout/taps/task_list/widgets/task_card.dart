@@ -19,9 +19,9 @@ class TaskCard extends StatelessWidget {
     return Consumer<LayoutProvider>(
       builder: (_, provider, __) {
         return Card(
-          margin: EdgeInsets.all(width * 0.02),
+          margin: const EdgeInsets.all(8),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(width * 0.03),
+            borderRadius: BorderRadius.circular(25),
           ),
           child: SizedBox(
             width: width * 0.9,
@@ -90,9 +90,7 @@ class TaskCard extends StatelessWidget {
                         Text(
                           task.desc,
                           style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontSize: width * 0.04,
-                                  ),
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16),
                         ),
                         Row(
                           children: [
@@ -121,7 +119,7 @@ class TaskCard extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(width * 0.02),
+                    padding: const EdgeInsets.all(16),
                     child: InkWell(
                       onTap: () => provider.setDone(task),
                       child: task.isDone

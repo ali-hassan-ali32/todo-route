@@ -10,42 +10,24 @@ import 'package:todo_app/modules/layout/taps/setting/screens/setting_tab.dart';
 import 'package:todo_app/modules/layout/taps/task_list/screens/task_list_tab.dart';
 
 class LayoutProvider extends ChangeNotifier {
-  int selectedIndex = 0;
-  String localeDropDownValue = 'english';
   final TextEditingController titleController = TextEditingController();
+  int selectedIndex = 0;
   final TextEditingController descController = TextEditingController();
-  TimeOfDay selectedTime = TimeOfDay.now();
   DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
+  UserModel? user;
+  String localeDropDownValue = 'english';
   DateTime selectedDatePicker = DateTime.now();
+
   final List<Widget> tabs = [const TaskListTab(), const SettingTab()
   ];
 
-  late StreamSubscription<UserModel?> _userSubscription;
-  UserModel? user;
 
-  LayoutProvider() {
-    _listenToUserStream();
-  }
 
-  void _listenToUserStream() {
-    _userSubscription = FirebaseFunctions.getUser().listen((userData) {
-      user = userData;
-      notifyListeners();
-    });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _userSubscription.cancel();
-    super.dispose();
-  }
-
-//############################# Task Servises ##################################
   void addNewTask(BuildContext context) async{
     TaskModel task = TaskModel(
       time: DateFormat('h:mm a', context.locale.toString())
-          .format(convertTimeOfDayToDateTime(selectedTime, selectedDatePicker)),
+          .format(changeTimeOfDayToDate(selectedTime, selectedDatePicker)),
       title: titleController.text,
       desc: descController.text,
       date: DateUtils.dateOnly(selectedDatePicker).millisecondsSinceEpoch,
@@ -81,20 +63,7 @@ class LayoutProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//############################# User Servises ##################################
-  void setName(String newName) {
-    if (user != null) {
-      user?.name = newName;
-    }
-    notifyListeners();
-  }
 
-  void updateUser() {
-    FirebaseFunctions.updateUser(user);
-    notifyListeners();
-  }
-
-//############################# aother Servises ################################
   void setTapIndex(int index) {
     selectedIndex = index;
     notifyListeners();
@@ -109,7 +78,7 @@ class LayoutProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime convertTimeOfDayToDateTime(TimeOfDay time, DateTime date) {
+  DateTime changeTimeOfDayToDate(TimeOfDay time, DateTime date) {
     return DateTime(
       date.year,
       date.month,

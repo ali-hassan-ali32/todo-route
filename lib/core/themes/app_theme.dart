@@ -3,7 +3,8 @@ import 'package:todo_app/core/utils/colors_provider.dart';
 
 class AppTheme {
   static ThemeData light = ThemeData(
-    iconTheme: const IconThemeData(
+      useMaterial3: false,
+      iconTheme: const IconThemeData(
         color: ColorsProvider.white,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -123,6 +124,7 @@ class AppTheme {
       ));
 
   static ThemeData dark = ThemeData(
+      useMaterial3: false,
       colorScheme: ColorScheme.fromSeed(
           seedColor: ColorsProvider.darkPrimaly,
           primary: ColorsProvider.primaly,

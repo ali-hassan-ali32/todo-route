@@ -3,17 +3,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_app/core/mangers/theme_provider.dart';
-import 'package:todo_app/core/themes/app_theme.dart';
-import 'package:todo_app/modules/auth/pages/create_account_screen.dart';
-import 'package:todo_app/modules/auth/pages/login_screen.dart';
-import 'package:todo_app/modules/auth/pages/reset_password_screen.dart';
-import 'package:todo_app/modules/layout/main_layout/screens/layout_screen.dart';
-import 'package:todo_app/modules/layout/taps/setting/screens/profile_edit_screen.dart';
-import 'package:todo_app/modules/layout/taps/task_list/screens/edit_task_screen.dart';
-import 'package:todo_app/modules/splash/splash_screen.dart';
 
+import 'core/mangers/theme_provider.dart';
+import 'core/themes/app_theme.dart';
 import 'firebase_options.dart';
+import 'modules/auth/pages/create_account_screen.dart';
+import 'modules/auth/pages/login_screen.dart';
+import 'modules/layout/main_layout/screens/layout_screen.dart';
+import 'modules/layout/taps/task_list/screens/edit_task_screen.dart';
+import 'modules/splash/splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,9 +53,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (_) => const SplashScreen(),
         CreateAccountScreen.routeName: (_) => CreateAccountScreen(),
         LoginScreen.routeName: (_) => const LoginScreen(),
-        ProfileEditScreen.routeName: (_) => const ProfileEditScreen(),
         LayoutScreen.routeName: (_)=> const LayoutScreen(),
-        ResetPasswordScreen.routeName: (_) => ResetPasswordScreen(),
         EditTaskScreen.routeName: (_)=> const EditTaskScreen()
       },
     );

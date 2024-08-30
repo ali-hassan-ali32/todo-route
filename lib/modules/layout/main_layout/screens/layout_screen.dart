@@ -12,7 +12,6 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var iconSize = size.width * 0.08;
 
     return MultiProvider(
       providers: [
@@ -27,8 +26,8 @@ class LayoutScreen extends StatelessWidget {
           return Scaffold(
             extendBody: true,
             floatingActionButton: SizedBox(
-              height: size.width * 0.18,
-              width: size.width * 0.18,
+              height: size.width * 0.16,
+              width: size.width * 0.16,
               child: FloatingActionButton(
                 onPressed: () {
                   showModalBottomSheet(
@@ -49,9 +48,9 @@ class LayoutScreen extends StatelessWidget {
                     },
                   );
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.add,
-                  size: iconSize,
+                  size: 25,
                 ),
               ),
             ),
@@ -63,13 +62,13 @@ class LayoutScreen extends StatelessWidget {
               child: BottomNavigationBar(
                 currentIndex: selectedTab,
                 onTap: layoutProvider.setTapIndex,
-                items: [
+                items: const [
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.list, size: iconSize),
+                    icon: Icon(Icons.list, size: 32),
                     label: '',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.settings, size: iconSize),
+                    icon: Icon(Icons.settings, size: 32),
                     label: '',
                   ),
                 ],

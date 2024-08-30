@@ -1,5 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/servises/firebase_function/firebase_functions.dart';
@@ -7,11 +5,11 @@ import 'package:todo_app/modules/auth/pages/login_screen.dart';
 import 'package:todo_app/modules/layout/main_layout/screens/layout_screen.dart';
 
 class AuthProvider extends ChangeNotifier {
-  bool isSecure = true;
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var phoneController = TextEditingController();
+  bool isSecure = true;
 
   void changeSecured() {
     isSecure = !isSecure;
@@ -41,41 +39,23 @@ class AuthProvider extends ChangeNotifier {
 
   void loginUser(BuildContext context) async {
     try {
-      UserCredential credential = await FirebaseFunctions.loginUser(
+      final UserCredential credential = await FirebaseFunctions.loginUser(
           emailController.text, passwordController.text);
       if (credential.user != null) {
         emailController.clear();
         passwordController.clear();
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'welcomeBack'.tr(),
-            message: 'letsStart'.tr(),
-            contentType: ContentType.success,
-          ),
+        const snackBar = SnackBar(
+          content: Text('Welcome'),
         );
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Navigator.pushNamedAndRemoveUntil(
             context, LayoutScreen.routeName, (route) => false);
       }
     } catch (e) {
-      final snackBar = SnackBar(
-        elevation: 0,
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        content: AwesomeSnackbarContent(
-          title: 'Email or Passoword is in not Correct'.tr(),
-          message: 'errorHappen'.tr(),
-          contentType: ContentType.failure,
-        ),
+      const snackBar = SnackBar(
+        content: Text('Email or Password not Correct'),
       );
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 

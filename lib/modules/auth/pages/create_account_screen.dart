@@ -28,12 +28,12 @@ class CreateAccountScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Spacer(flex: 2),
+                  const Spacer(flex: 3),
                   Text(
                     'createAccount'.tr(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: size.width * 0.065,
+                    style: const TextStyle(
+                      fontSize: 32,
                       color: ColorsProvider.primaly,
                     ),
                   ),
@@ -72,13 +72,6 @@ class CreateAccountScreen extends StatelessWidget {
                     decoration: InputDecoration(hintText: 'email'.tr()),
                   ),
                   SizedBox(height: size.height * 0.01),
-                  TextFormField(
-                    controller: provider.phoneController,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontSize: size.width * 0.045,
-                        fontWeight: FontWeight.w400),
-                    decoration: InputDecoration(hintText: 'phone'.tr()),
-                  ),
                   SizedBox(height: size.height * 0.01),
                   TextFormField(
                     controller: provider.passwordController,
@@ -109,10 +102,12 @@ class CreateAccountScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorsProvider.primaly,
                       foregroundColor: ColorsProvider.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
                       fixedSize: Size.fromHeight(size.height * 0.06),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'createAccount'.tr(),
@@ -121,7 +116,6 @@ class CreateAccountScreen extends StatelessWidget {
                               .bodyMedium!
                               .copyWith(color: ColorsProvider.white),
                         ),
-                        const Icon(Icons.login),
                       ],
                     ),
                   ),
@@ -137,9 +131,9 @@ class CreateAccountScreen extends StatelessWidget {
                         context, LoginScreen.routeName, (route) => false),
                     child: Text(
                       'alreadyHaveAccount'.tr(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: size.width * 0.04,
+                        fontSize: 22,
                       ),
                     ),
                   ),

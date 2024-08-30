@@ -7,12 +7,11 @@ class ThemeProvider extends ChangeNotifier {
   final String themeModeValueKey = 'themeMode';
   String themeDropDownValue = 'light';
 
-  // becouse i use easy locale packge i cant set saved locale at start
-  // so i aready get themeMode at start so i will also do it here with it
-  // if you eng john have solotion to set (theme drop botton) in the start
-  // please send feedback
-
   final SharedPreferences prefs;
+
+  static ThemeProvider get(BuildContext context) {
+    return Provider.of<ThemeProvider>(context);
+  }
 
   ThemeProvider({required this.prefs}) {
     readSavedThemeMode();
@@ -43,9 +42,5 @@ class ThemeProvider extends ChangeNotifier {
       themeDropDownValue = newTheme;
       notifyListeners();
     }
-  }
-
-  static ThemeProvider get(BuildContext context) {
-    return Provider.of<ThemeProvider>(context);
   }
 }

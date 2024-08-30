@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/core/utils/colors_provider.dart';
 import 'package:todo_app/modules/auth/manger/auth_provider.dart';
 import 'package:todo_app/modules/auth/pages/create_account_screen.dart';
-import 'package:todo_app/modules/auth/pages/reset_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = 'LoginScreen';
@@ -29,24 +28,24 @@ class LoginScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: ColorsProvider.primaly,
-                        fontSize: size.width * 0.07,
+                        fontSize: 32,
                       ),
                 ),
-                SizedBox(height: size.height * 0.02),
+                SizedBox(height: size.height * 0.01),
                 TextFormField(
                   controller: provider.emailController,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: size.width * 0.045,
+                      fontSize: size.width * 0.056,
                       fontWeight: FontWeight.w400),
                   decoration: InputDecoration(hintText: 'email'.tr()),
                 ),
-                SizedBox(height: size.height * 0.02),
+                SizedBox(height: size.height * 0.01),
                 TextFormField(
                   obscuringCharacter: '*',
                   obscureText: provider.isSecure,
                   controller: provider.passwordController,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: size.width * 0.045,
+                      fontSize: size.width * 0.048,
                       fontWeight: FontWeight.w400),
                   decoration: InputDecoration(
                     hintText: 'password'.tr(),
@@ -66,46 +65,21 @@ class LoginScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () => provider.loginUser(context),
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
                     backgroundColor: ColorsProvider.primaly,
                     foregroundColor: ColorsProvider.white,
                     minimumSize: Size.fromHeight(size.height * 0.07),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'login'.tr(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: ColorsProvider.white),
-                      ),
-                      Icon(
-                        Icons.login,
-                        color: Theme.of(context).iconTheme.color,
-                        size: size.width * 0.06,
-                      ),
-                    ],
+                  child: Text(
+                    'login'.tr(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: ColorsProvider.white),
                   ),
                 ),
                 const Spacer(),
-                TextButton(
-                  style: const ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll(Colors.transparent)),
-                  onPressed: () {
-                    Navigator.pushNamed(context, ResetPasswordScreen.routeName);
-                  },
-                  child: Center(
-                    child: Text(
-                      'dontRememberPassword'.tr(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: size.width * 0.04,
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(height: size.height * 0.01),
                 TextButton(
                   style: const ButtonStyle(
@@ -117,9 +91,9 @@ class LoginScreen extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'dontHaveAccount'.tr(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: size.width * 0.04,
+                        fontSize: 22,
                       ),
                     ),
                   ),

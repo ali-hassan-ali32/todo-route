@@ -6,7 +6,6 @@ import 'package:todo_app/core/models/task_model.dart';
 import '../../models/user_model.dart';
 
 class FirebaseFunctions {
-//############################# Task Servises ##################################
   static CollectionReference<TaskModel> getTasksCollection() {
     return FirebaseFirestore.instance
         .collection('Tasks')
@@ -49,7 +48,6 @@ class FirebaseFunctions {
         .snapshots();
   }
 
-//############################# User serervises ##################################
   static CollectionReference<UserModel> getUsersCollection() {
     return FirebaseFirestore.instance
         .collection('Users')

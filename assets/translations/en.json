@@ -3,6 +3,7 @@
   "theme": "Theme",
   "dark": "Dark",
   "light": "Light",
+  "toDoApp": "To Do App",
   "addNewTask": "Add New Task",
   "enterNewTaskTile": "enter new task title",
   "enterNewTaskDetails": "enter new task details",

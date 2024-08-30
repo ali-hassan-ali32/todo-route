@@ -19,10 +19,6 @@ class EditTaskScreen extends StatelessWidget {
         builder: (context, provider, child) {
           var task = ModalRoute.of(context)!.settings.arguments as TaskModel;
 
-          provider.setSelectedDatePicker(
-              DateTime.fromMillisecondsSinceEpoch(task.date));
-          provider.setTime(_stringToTimeOfDay(task.time));
-
           return Scaffold(
             body: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -30,9 +26,9 @@ class EditTaskScreen extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      const AppBarCustomWidget(
+                      const AppBarWidget(
                         title: 'edit task',
-                        isThereArrowBack: true,
+                        arrowBack: true,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -257,10 +253,5 @@ class EditTaskScreen extends StatelessWidget {
         },
       ),
     );
-  }
-
-  TimeOfDay _stringToTimeOfDay(String timeStr) {
-    final format = DateFormat.jm();
-    return TimeOfDay.fromDateTime(format.parse(timeStr));
   }
 }
